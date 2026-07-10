@@ -58,6 +58,12 @@
   .brand-logo img { max-height:40px; max-width:165px; object-fit:contain; filter:grayscale(1); opacity:.85; transition:opacity .2s; }
   .brand-logo:hover img { opacity:1; }
   .brand-logo .fallback { display:none; font-family:'Sora',sans-serif; font-size:22px; color:#2b3a35; }
+  @media (max-width:768px){
+    .brand-track { scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+    .brand-track::-webkit-scrollbar{ display:none; }
+    .brand-track .brand-logo { flex:0 0 auto; width:38%; height:66px; padding:0 8px; scroll-snap-align:center; }
+    .brand-track .brand-logo img { max-height:34px; }
+  }
   /* portfolio scroll gallery */
   .jgallery { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; padding-bottom:10px; -webkit-overflow-scrolling:touch; }
   .jgallery::-webkit-scrollbar{ height:6px; } .jgallery::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.2); border-radius:6px; }
@@ -95,7 +101,7 @@
 </header>
 
 <!-- HERO -->
-<section id="top" class="relative h-screen w-full overflow-hidden">
+<section id="top" class="relative h-[60vh] min-h-[440px] md:h-screen w-full overflow-hidden">
   <div class="absolute inset-0 grid grid-cols-3 gap-[2px] bg-black/70">
     <img src="./photos/heli-skid.jpg" alt="" class="w-full h-full object-cover">
     <img src="./photos/cover.jpg" alt="" class="w-full h-full object-cover">
@@ -113,7 +119,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="mx-auto max-w-container px-6 md:px-10 py-28 md:py-36">
+<section id="about" class="mx-auto max-w-container px-6 md:px-10 py-16 md:py-36">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
     <figure class="reveal overflow-hidden rounded-xl shadow-2xl max-w-[440px] mx-auto md:mx-0 w-full">
       <img src="./photos/hero-2.jpg" alt="Callie Rounds" class="w-full h-full object-cover aspect-[4/5]">
@@ -135,7 +141,7 @@
 </section>
 
 <!-- REACH -->
-<section id="reach" class="mx-auto max-w-container px-6 md:px-10 py-28 md:py-36 border-t border-border">
+<section id="reach" class="mx-auto max-w-container px-6 md:px-10 py-16 md:py-36 border-t border-border">
   <div class="reveal">
     <div class="kicker mb-4">02 · Reach</div>
     <h2 class="font-sora font-bold tracking-tight leading-[1.02]" style="font-size:clamp(34px,5vw,58px)">The numbers.</h2>
@@ -160,7 +166,7 @@
 
 <!-- REEL -->
 <section id="reel" class="border-t border-border bg-ink text-white">
-  <div class="mx-auto max-w-container px-6 md:px-10 py-28 md:py-36 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+  <div class="mx-auto max-w-container px-6 md:px-10 py-16 md:py-36 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
     <!-- phone card -->
     <div class="reveal flex justify-center">
       <a href="https://www.instagram.com/reel/DZxl44uKFZ5/" target="_blank" rel="noopener"
@@ -198,7 +204,7 @@
 </section>
 
 <!-- AUDIENCE -->
-<section id="audience" class="mx-auto max-w-container px-6 md:px-10 py-28 md:py-36 border-t border-border">
+<section id="audience" class="mx-auto max-w-container px-6 md:px-10 py-16 md:py-36 border-t border-border">
   <div class="reveal">
     <div class="kicker mb-4">04 · Audience</div>
     <h2 class="font-sora font-bold tracking-tight leading-[1.02]" style="font-size:clamp(34px,5vw,58px)">A global audience.</h2>
@@ -233,7 +239,7 @@
 
 <!-- WORK — Featured Projects (top 3): playable video + scrollable photo gallery -->
 <section id="work" class="bg-ink text-white border-t border-border">
-  <div class="mx-auto max-w-container px-6 md:px-10 pt-28 md:pt-36 pb-10">
+  <div class="mx-auto max-w-container px-6 md:px-10 pt-16 md:pt-36 pb-10">
     <div class="reveal">
       <div class="kicker mb-4" style="color:#8dd3c1">05 · Selected Work</div>
       <h2 class="font-sora font-bold tracking-tight leading-[1.02]" style="font-size:clamp(34px,5vw,58px)">Featured projects.</h2>
@@ -326,13 +332,13 @@
 </section>
 
 <!-- BRANDS -->
-<section id="brands" class="mx-auto max-w-container px-6 md:px-10 py-28 md:py-36 border-t border-border">
+<section id="brands" class="mx-auto max-w-container px-6 md:px-10 py-16 md:py-36 border-t border-border">
   <div class="reveal text-center">
     <div class="kicker mb-4">08 · Brand Partnerships</div>
     <div class="rule mx-auto mb-8"></div>
     <h2 class="font-sora font-bold tracking-tight" style="font-size:clamp(40px,6vw,80px)">Selected partners.</h2>
   </div>
-  <div class="reveal mt-20 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16 text-center">
+  <div class="reveal mt-12 md:mt-20 brand-track flex md:grid md:grid-cols-3 gap-4 md:gap-x-8 md:gap-y-16 overflow-x-auto md:overflow-visible pb-3 md:pb-0 text-center">
     <div class="brand-logo"><img src="./logos/insta360-trim.png" alt="Insta360"><span class="fallback">Insta360</span></div>
     <div class="brand-logo"><img src="./logos/relais-trim.png" alt="Relais &amp; Ch&acirc;teaux"><span class="fallback">Relais &amp; Ch&acirc;teaux</span></div>
     <div class="brand-logo"><img src="./logos/royalcaribbean-trim.png" alt="Royal Caribbean"><span class="fallback">Royal Caribbean</span></div>
@@ -345,7 +351,7 @@
 
 <!-- WHY ME -->
 <section class="bg-card border-t border-border">
-  <div class="mx-auto max-w-4xl px-6 md:px-10 py-28 md:py-40 text-center">
+  <div class="mx-auto max-w-4xl px-6 md:px-10 py-20 md:py-40 text-center">
     <div class="reveal">
       <div class="kicker mb-5">09 · The Collaboration</div>
       <div class="rule mx-auto mb-10"></div>
