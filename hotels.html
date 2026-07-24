@@ -408,20 +408,40 @@
     };
     requestAnimationFrame(tick);
   };
+  const reveal = (el) => el.classList.add('in');
   const sweep = () => {
     const vh = window.innerHeight;
     document.querySelectorAll('.reveal:not(.in)').forEach(el => {
       const r = el.getBoundingClientRect();
-      if (r.top < vh * 0.92 && r.bottom > 0) el.classList.add('in');
+      if (r.top < vh * 0.98 && r.bottom > 0) reveal(el);
     });
     document.querySelectorAll('.count').forEach(el => {
       const r = el.getBoundingClientRect();
-      if (r.top < vh * 0.85 && r.bottom > 0) runCount(el);
+      if (r.top < vh * 0.9 && r.bottom > 0) runCount(el);
     });
   };
+  // Primary reveal path: IntersectionObserver. It fires reliably even in in-app
+  // browsers (WhatsApp / Instagram webviews) where window 'scroll' events often
+  // never fire, which used to leave below-fold blocks permanently invisible.
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        if (e.target.classList.contains('reveal')) reveal(e.target);
+        if (e.target.classList.contains('count')) runCount(e.target);
+        obs.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    document.querySelectorAll('.reveal, .count').forEach(el => io.observe(el));
+  } else {
+    // No observer support: reveal everything up front so nothing can stay hidden.
+    document.querySelectorAll('.reveal').forEach(reveal);
+    document.querySelectorAll('.count').forEach(runCount);
+  }
   sweep();
   window.addEventListener('scroll', sweep, { passive: true });
   window.addEventListener('resize', sweep);
+  window.addEventListener('load', sweep);
   window.addEventListener('hashchange', () => setTimeout(sweep, 80));
   document.querySelectorAll('.nav-link, a[href^="#"]').forEach(a => a.addEventListener('click', () => setTimeout(sweep, 120)));
 
