@@ -86,7 +86,11 @@
   .gal-arrow:hover { background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.5); }
   @media (max-width:768px){ .jgallery img{ height:125px; width:auto; } }
   /* DJI video cards */
-  .djicard { position:relative; display:block; border-radius:16px; overflow:hidden; box-shadow:0 18px 44px rgba(0,0,0,.45); }
+  /* width:100% is load-bearing. The mobile rule below centres the card with margin:0 auto,
+     and auto margins on a grid item override stretch -> the item shrink-to-fits its content.
+     Every child here is absolutely positioned, so intrinsic width is 0, which collapses the
+     card to 0 wide and (because the ratio box is a % of width) 0 tall. Do not remove. */
+  .djicard { position:relative; display:block; width:100%; border-radius:16px; overflow:hidden; box-shadow:0 18px 44px rgba(0,0,0,.45); }
   /* padding-ratio box (9:16). Reliable in CSS grid on iOS / in-app WebKit, where
      aspect-ratio on a grid item with only absolutely-positioned children collapses to 0 height. */
   .djicard::before { content:""; display:block; padding-top:177.78%; }
